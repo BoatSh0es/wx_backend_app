@@ -1,18 +1,19 @@
 from flask import Flask, request, jsonify
 app = Flask(__name__)
 
-@app.route('/users', methods=['GET'])
-def respond():
-    admin = {
+admin = {
         "email": "zachziino@pm.me",
         "password": "adminforwx"
     }
+
+@app.route('/users', methods=['GET'])
+def respond():
 
     return jsonify(admin)
 
 @app.route('/')
 def index():
-    return "<h1>Welcome to our server !!</h1>"
+    return "<h1>Welcome to the WX Safe Flight Backend!</h1>"
 
 if __name__ == '__main__':
     app.run(threaded=True, port=5000)
