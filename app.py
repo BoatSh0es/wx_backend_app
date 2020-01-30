@@ -16,9 +16,7 @@ def respond():
 def login():
     user_data = request.get_json()
 
-    new_user = User(email=user_data['email'], password=user_data['password'])
-
-    return jsonify(new_user)
+    return jsonify(user_data)
 
 
 @app.route('/')
