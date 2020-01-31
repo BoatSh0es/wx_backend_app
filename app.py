@@ -6,6 +6,10 @@ admin = {
         "password": "adminforwx"
     }
 
+admin_email = (list(admin.values())[0])
+admin_password = (list(admin.values())[1])
+
+
 @app.route('/users', methods=['GET'])
 def respond():
 
@@ -16,7 +20,10 @@ def respond():
 def login():
     user_data = request.get_json()
 
-    return jsonify(user_data)
+    user_email = (list(user_data.values())[0])
+    user_password = (list(user_data.values())[1])
+
+    return jsonify(user_password)
 
 
 @app.route('/')
