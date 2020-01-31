@@ -24,7 +24,7 @@ def login():
 
     user_email = new_data["email"]
 
-    return jsonify(user_email)
+    return (user_email)
 
 
 @app.route('/')
