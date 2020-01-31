@@ -20,11 +20,7 @@ def respond():
 def login():
     user_data = request.get_json()
 
-    new_data = json.loads(user_data)
-
-    user_email = new_data["email"]
-
-    return (user_email)
+    return jsonify(user_data)
 
 
 @app.route('/')
