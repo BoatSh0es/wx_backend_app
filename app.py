@@ -23,7 +23,7 @@ def login():
     user_email = (list(user_data.values())[0])
     user_password = (list(user_data.values())[1])
 
-    return jsonify(user_password)
+    return (user_password)
 
 
 @app.route('/')
