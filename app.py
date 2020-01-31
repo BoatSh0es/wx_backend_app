@@ -20,6 +20,7 @@ def respond():
 def login():
     user_data = request.get_json()
 
+    print(user_data)
     return jsonify(user_data)
 
 
