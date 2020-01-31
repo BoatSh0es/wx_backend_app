@@ -19,10 +19,8 @@ def respond():
 @app.route('/login', methods=['POST'])
 def login():
     user_data = request.get_json()
-    
-    
 
-    return jsonify(user_data)
+    return jsonify(user_data[0])
 
 
 @app.route('/')
