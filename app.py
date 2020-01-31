@@ -20,7 +20,8 @@ def respond():
 def login():
     user_data = request.get_json()
 
-    print(user_data)
+    y = json.loads(user_data)
+    print(y["email"])
     return jsonify(user_data)
 
 
