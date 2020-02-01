@@ -32,9 +32,9 @@ def login():
     user_password = user_creds['password']
 
     if ( (admin_email == user_email) & (admin_password == user_password)  ):
-	    print("Yes")
+	    return(valid_login)
     else:
-	    print("NO")
+	    return(invalid_login)
 
     return jsonify(user_data)
 
