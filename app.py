@@ -29,6 +29,8 @@ def login():
 
     print(user_password)
 
+    print(admin_password)
+
     return jsonify(user_data)
 
 
