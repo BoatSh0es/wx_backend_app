@@ -36,6 +36,7 @@ def login():
     else:
 	    print("NO")
 
+    return jsonify(user_data)
 
 
 @app.route('/')
