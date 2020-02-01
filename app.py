@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import json
 app = Flask(__name__)
 
 admin = {
@@ -19,6 +20,10 @@ def respond():
 @app.route('/login', methods=['POST'])
 def login():
     user_data = request.get_json()
+
+    y = json.loads(user_data)
+
+    print(y["email"])
 
     return jsonify(user_data)
 
