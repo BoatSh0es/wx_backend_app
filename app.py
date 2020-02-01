@@ -10,6 +10,10 @@ admin = {
 admin_email = (list(admin.values())[0])
 admin_password = (list(admin.values())[1])
 
+valid_login = 'valid'
+
+invalid_login = 'invalid'
+
 
 @app.route('/users', methods=['GET'])
 def respond():
@@ -27,11 +31,11 @@ def login():
 
     user_password = user_creds['password']
 
-    print(user_password)
+    if ( (admin_email == user_email) & (admin_password == user_password)  ):
+	    return jsonify(user_data)
+    else:
+	print("NO")
 
-    print(admin_password)
-
-    return jsonify(user_data)
 
 
 @app.route('/')
