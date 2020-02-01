@@ -23,7 +23,7 @@ def login():
 
     y = json.loads(user_data)
 
-    print(y["email"])
+    print(y)
 
     return jsonify(user_data)
 
