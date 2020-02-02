@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -9,6 +10,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
 
 
 db = SQLAlchemy(app)
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -29,6 +31,8 @@ def register():
     return 'Done', 201
 
 
+
+
 @app.route('/users', methods=['GET'])
 def respond():
     user_list = User.query.all()
@@ -40,25 +44,40 @@ def respond():
     return jsonify({'users' : users})
 
 
+
+
 @app.route('/login', methods=['POST'])
 def login():
 
-    admin = User.query.filter_by(id=1).first()
+    #admin = User.query.filter_by(id=1).first()
 
-    user_data = request.get_json()
+    #user_data = request.get_json()
 
-    user_creds = user_data['user']
+    #user_creds = user_data['user']
 
-    if ( (admin.email == user_creds['email']) & (admin.password == user_creds['password']) ):
-	    return('valid')
-    else:
-	    return('invalid')
+    email = request.get_json('email')
+    password = request.get_json('password')
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user or not check_password_hash(user.password, password): 
+        flash('Please check your login details and try again.')
+        return('valid') 
+
+    return('invalid')
+
+    # if ( (admin.email == user_creds['email']) & (admin.password == user_creds['password']) ):
+	#     return('valid')
+    # else:
+	#     return('invalid')
+
 
 
 
 @app.route('/')
 def index():
     return "<h1>Welcome to the WX Safe Flight Backend!</h1>"
+
 
 
 if __name__ == '__main__':
