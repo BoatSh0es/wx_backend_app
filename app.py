@@ -35,12 +35,8 @@ def register():
 @app.route('/users', methods=['GET'])
 def respond():
     user_list = User.query.all()
-    users = []
 
-    for user in user_list:
-        users.append({'email' : user.email, 'password' : user.password})
-
-    return jsonify({'users' : users})
+    return jsonify(user_list)
 
 
 
