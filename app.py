@@ -1,40 +1,66 @@
-from flask import Flask, request, jsonify
-import urllib.parse
+from flask import Flask, jsonify, request
+from flask_sqlalchemy import SQLAlchemy
+
 app = Flask(__name__)
 
-admin = {
-        "email": "admin@admin.com",
-        "password": "admin"
-    }
 
-admin_email = (list(admin.values())[0])
-admin_password = (list(admin.values())[1])
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
 
-valid_login = 'valid'
 
-invalid_login = 'invalid'
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(50))
+    password= db.Column(db.String(50))
+
+
+
+@app.route('/register', methods=['POST'])
+def register():
+    user_data = request.get_json()
+
+    new_user = User(email=user_data['email'], password=user_data['password'])
+
+    db.session.add(new_user)
+    db.session.commit()
+
+    return 'Done', 201
 
 
 @app.route('/users', methods=['GET'])
 def respond():
+    user_list = User.query.all()
+    users = []
 
-    return jsonify(admin)
+
+    for user in user_list:
+        users.append({'email' : user.email, 'password' : user.password})
 
 
-@app.route('/login', methods=['POST'])
-def login():
-    user_data = request.get_json()
+    return jsonify({'users' : users})
 
-    user_creds = user_data['user']
 
-    user_email = user_creds['email']
+# @app.route('/login', methods=['POST'])
+# def login():
 
-    user_password = user_creds['password']
+#     valid_login = 'valid'
 
-    if ( (admin_email == user_email) & (admin_password == user_password)  ):
-	    return(valid_login)
-    else:
-	    return(invalid_login)
+#     invalid_login = 'invalid'
+
+#     user_data = request.get_json()
+
+#     user_creds = user_data['user']
+
+#     user_email = user_creds['email']
+
+#     user_password = user_creds['password']
+
+#     if ( (admin_email == user_email) & (admin_password == user_password)  ):
+# 	    return(valid_login)
+#     else:
+# 	    return(invalid_login)
 
 
 
@@ -42,5 +68,7 @@ def login():
 def index():
     return "<h1>Welcome to the WX Safe Flight Backend!</h1>"
 
+
 if __name__ == '__main__':
     app.run(threaded=True, port=5000)
+
