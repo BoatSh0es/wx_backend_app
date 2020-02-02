@@ -31,16 +31,6 @@ def register():
 
 
 
-
-@app.route('/users', methods=['GET'])
-def respond():
-    user_list = User.query.all()
-
-    return (user_list)
-
-
-
-
 @app.route('/login', methods=['POST'])
 def login():
 
