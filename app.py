@@ -1,5 +1,4 @@
 from flask import Flask, jsonify, request
-from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -65,9 +64,11 @@ def login():
 
     user_creds = user_data['user']
 
-    user = User.query.filter_by(email=user_creds['email']).first()
+    user_email = User.query.filter_by(email=user_creds['email']).first()
 
-    if not user:
+    user_password = User.query.filter_by(email=user_creds['password']).first()
+
+    if not user_email or not user_password:
         return('invalid') 
     else:
         return('valid')
