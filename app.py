@@ -54,7 +54,7 @@ def login():
 
     user_email = User.query.filter_by(email=user_creds['email']).first()
 
-    user_password = User.query.filter_by(email=user_creds['password']).first()
+    user_password = User.query.filter_by(password=user_creds['password']).first()
 
     if ( (user_email == user_creds['email']) & (user_password == user_creds['password']) ):
         return('valid') 
