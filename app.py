@@ -53,11 +53,11 @@ def login():
 
     user_creds = user_data['user']
 
-    user_email = user_creds['email']
+    # user_email = user_creds['email']
 
-    user_password = user_creds['password']
+    # user_password = user_creds['password']
 
-    if ( (admin.email == user_email) & (admin.password == user_password)  ):
+    if ( (admin.email == user_creds['email']) & (admin.password == user_creds['password'])  ):
 	    return(valid_login)
     else:
 	    return(invalid_login)
