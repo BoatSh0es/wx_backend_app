@@ -55,9 +55,13 @@ def login():
 
     user_creds = user_data['user']
 
-    user = User.query.filter_by(email=user_creds['email']).first()
+    email = user_creds['email']
 
-    if not user or not check_password_hash(user.password, user_creds['password']): 
+    password = user_creds['password']
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user or not check_password_hash(user.password, password): 
         return('invalid') 
     else:
         return('valid')
