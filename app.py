@@ -20,7 +20,7 @@ class User(db.Model):
 
 
 
-@main.route('/users')
+@app.route('/users')
 def users():
     user_list = User.query.all()
     users = []
