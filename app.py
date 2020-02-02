@@ -60,12 +60,13 @@ def login():
     # else:
 	#     return('invalid')
 
-    email = request.get_json('email')
-    password = request.get_json('password')
+    user_data = request.get_json()
 
-    user = User.query.filter_by(email=email).first()
+    user_creds = user_data['user']
 
-    if not user and not check_password_hash(user.password, password):
+    user = User.query.filter_by(email=user_creds['email']).first()
+
+    if not user and not check_password_hash(user.password, user_creds['password']):
         return('invalid') 
     else:
         return('valid')
