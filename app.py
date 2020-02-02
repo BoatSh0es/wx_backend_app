@@ -34,33 +34,38 @@ def respond():
     user_list = User.query.all()
     users = []
 
-
     for user in user_list:
         users.append({'email' : user.email, 'password' : user.password})
 
-
+    print(admin.email)
     return jsonify({'users' : users})
 
 
-# @app.route('/login', methods=['POST'])
-# def login():
+@app.route('/login', methods=['POST'])
+def login():
 
-#     valid_login = 'valid'
+    admin = User.query.filter_by(id=1).first()
 
-#     invalid_login = 'invalid'
+    admin_email = admin.email
 
-#     user_data = request.get_json()
+    admin_password = admin.password
 
-#     user_creds = user_data['user']
+    valid_login = 'valid'
 
-#     user_email = user_creds['email']
+    invalid_login = 'invalid'
 
-#     user_password = user_creds['password']
+    user_data = request.get_json()
 
-#     if ( (admin_email == user_email) & (admin_password == user_password)  ):
-# 	    return(valid_login)
-#     else:
-# 	    return(invalid_login)
+    user_creds = user_data['user']
+
+    user_email = user_creds['email']
+
+    user_password = user_creds['password']
+
+    if ( (admin_email == user_email) & (admin_password == user_password)  ):
+	    return(valid_login)
+    else:
+	    return(invalid_login)
 
 
 
