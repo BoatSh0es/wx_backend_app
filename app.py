@@ -45,6 +45,10 @@ def login():
 
     admin = User.query.filter_by(id=1).first()
 
+    admin_email = admin.email
+
+    admin_password = admin.password
+
     valid_login = 'valid'
 
     invalid_login = 'invalid'
@@ -57,7 +61,7 @@ def login():
 
     user_password = user_creds['password']
 
-    if ( (admin.email == user_email) & (admin.password == user_password)  ):
+    if ( (admin_email == user_email) & (admin_password == user_password)  ):
 	    return(valid_login)
     else:
 	    return(invalid_login)
