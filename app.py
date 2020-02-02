@@ -51,20 +51,16 @@ def login():
 
     #admin = User.query.filter_by(id=1).first()
 
-    #user_data = request.get_json()
+    user_data = request.get_json()
 
-    #user_creds = user_data['user']
+    user_creds = user_data['user']
 
-    email = request.get_json('email')
-    password = request.get_json('password')
+    user = User.query.filter_by(email=user_creds['email']).first()
 
-    user = User.query.filter_by(email=email).first()
-
-    if not user or not check_password_hash(user.password, password): 
-        flash('Please check your login details and try again.')
-        return('valid') 
-
-    return('invalid')
+    if not user or not check_password_hash(user.password, user_creds['password']): 
+        return('invalid') 
+    else:
+    return('valid')
 
     # if ( (admin.email == user_creds['email']) & (admin.password == user_creds['password']) ):
 	#     return('valid')
