@@ -60,8 +60,8 @@ def login():
     # else:
 	#     return('invalid')
 
-    email = request.form.get('email')
-    password = request.form.get('password')
+    email = request.get_json('email')
+    password = request.get_json('password')
 
     user = User.query.filter_by(email=email).first()
 
