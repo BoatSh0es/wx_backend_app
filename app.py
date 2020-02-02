@@ -68,10 +68,10 @@ def login():
 
     user_password = User.query.filter_by(email=user_creds['password']).first()
 
-    if not user_email or not user_password:
-        return('invalid') 
+    if ( (user_email == user_creds['email']) & (user_password == user_creds['password']) ):
+        return('valid') 
     else:
-        return('valid')
+        return('invalid')
 
 
 
