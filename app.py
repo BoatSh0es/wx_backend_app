@@ -18,6 +18,22 @@ class User(db.Model):
 
 
 
+
+
+@main.route('/users')
+def users():
+    user_list = User.query.all()
+    users = []
+
+
+    for user in user_list:
+        users.append({'email' : user.email, 'password' : user.password})
+
+
+    return jsonify({'users' : users})
+
+
+
 @app.route('/register', methods=['POST'])
 def register():
     user_data = request.get_json()
