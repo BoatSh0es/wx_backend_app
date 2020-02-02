@@ -37,7 +37,6 @@ def respond():
     for user in user_list:
         users.append({'email' : user.email, 'password' : user.password})
 
-    print(admin.email)
     return jsonify({'users' : users})
 
 
