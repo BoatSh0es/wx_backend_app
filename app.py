@@ -60,7 +60,7 @@ def login():
     if not user or not check_password_hash(user.password, user_creds['password']): 
         return('invalid') 
     else:
-    return('valid')
+        return('valid')
 
     # if ( (admin.email == user_creds['email']) & (admin.password == user_creds['password']) ):
 	#     return('valid')
