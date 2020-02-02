@@ -45,22 +45,14 @@ def login():
 
     admin = User.query.filter_by(id=1).first()
 
-    valid_login = 'valid'
-
-    invalid_login = 'invalid'
-
     user_data = request.get_json()
 
     user_creds = user_data['user']
 
-    # user_email = user_creds['email']
-
-    # user_password = user_creds['password']
-
-    if ( (admin.email == user_creds['email']) & (admin.password == user_creds['password'])  ):
-	    return(valid_login)
+    if ( (admin.email == user_creds['email']) & (admin.password == user_creds['password']) ):
+	    return('valid')
     else:
-	    return(invalid_login)
+	    return('invalid')
 
 
 
