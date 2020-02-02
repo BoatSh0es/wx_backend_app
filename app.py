@@ -36,7 +36,7 @@ def register():
 def respond():
     user_list = User.query.all()
 
-    return jsonify(user_list)
+    return (user_list)
 
 
 
