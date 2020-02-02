@@ -22,7 +22,9 @@ class User(db.Model):
 def register():
     user_data = request.get_json()
 
-    new_user = User(email=user_data['email'], password=user_data['password'])
+    user_creds = user_data['user']
+
+    new_user = User(email=user_creds['email'], password=user_creds['password'])
 
     db.session.add(new_user)
     db.session.commit()
