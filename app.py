@@ -48,18 +48,6 @@ def respond():
 @app.route('/login', methods=['POST'])
 def login():
 
-    #admin = User.query.filter_by(id=1).first()
-
-    # user_data = request.get_json()
-
-    # user_creds = user_data['user']
-
-    # if ( (admin.email == user_creds['email']) & (admin.password == user_creds['password']) ):
-	#     return('valid')
-    # else:
-	#     return('invalid')
-
-
     user_data = request.get_json()
 
     user_creds = user_data['user']
