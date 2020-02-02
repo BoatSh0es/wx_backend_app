@@ -51,25 +51,25 @@ def login():
 
     #admin = User.query.filter_by(id=1).first()
 
-    user_data = request.get_json()
+    # user_data = request.get_json()
 
-    user_creds = user_data['user']
-
-    email = user_creds['email']
-
-    password = user_creds['password']
-
-    user = User.query.filter_by(email=email).first()
-
-    if not user or not check_password_hash(user.password, password): 
-        return('invalid') 
-    else:
-        return('valid')
+    # user_creds = user_data['user']
 
     # if ( (admin.email == user_creds['email']) & (admin.password == user_creds['password']) ):
 	#     return('valid')
     # else:
 	#     return('invalid')
+
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user and not check_password_hash(user.password, password):
+        return('invalid') 
+    else:
+        return('valid')
+
 
 
 
