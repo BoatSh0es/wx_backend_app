@@ -68,7 +68,6 @@ def login():
 
 
 
-
 @app.route('/')
 def index():
     return "<h1>Welcome to the WX Safe Flight Backend!</h1>"
