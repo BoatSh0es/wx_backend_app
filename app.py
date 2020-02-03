@@ -34,7 +34,7 @@ class User(db.Model):
 
 
 @app.route('/mail')
-def send_mail():
+def send():
     msg = Message('Welcome!', recipients=['zachziino@pm.me'])
     msg.html = '<b>Welcome to Wx Safe Flight! Enjoy, and may good weather be with you!</b>'
     mail.send(msg)
@@ -71,11 +71,6 @@ def register():
 
     db.session.add(new_user)
     db.session.commit()
-
-    msg = Message('Welcome!', recipients=[user_creds_register['email']])
-    
-    msg.html = '<b>Welcome to Wx Safe Flight! Enjoy, and may good weather be with you!</b>'
-    mail.send(msg)
 
 
     return 'Done', 201
