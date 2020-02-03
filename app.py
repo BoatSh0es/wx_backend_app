@@ -38,14 +38,14 @@ def users():
 def register():
     user_data = request.get_json()
 
-    user_creds = user_data['user']
+    user_creds_register = user_data['user']
 
-    user = User.query.filter_by(email=user_creds['email']).first()
+    user = User.query.filter_by(email=user_creds_register['email']).first()
 
     if user: 
         return ('notDone')
 
-    new_user = User(email=user_creds['email'], password=user_creds['password'])
+    new_user = User(email=user_creds_register['email'], password=user_creds_register['password'])
 
     db.session.add(new_user)
     db.session.commit()
@@ -59,11 +59,11 @@ def login():
 
     user_data = request.get_json()
 
-    user_creds = user_data['user']
+    user_creds_login = user_data['user']
 
-    user_email = User.query.filter_by(email=user_creds['email']).first()
+    user_email = User.query.filter_by(email=user_creds_login['email']).first()
 
-    user_password = User.query.filter_by(password=user_creds['password']).first()
+    user_password = User.query.filter_by(password=user_creds_login['password']).first()
 
     if not user_email or not user_password:
         return('invalid') 
