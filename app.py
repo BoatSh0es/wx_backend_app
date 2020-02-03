@@ -40,6 +40,11 @@ def register():
 
     user_creds = user_data['user']
 
+    user = User.query.filter_by(email=user_creds['email']).first()
+
+    if user: 
+        return ('notDone')
+
     new_user = User(email=user_creds['email'], password=user_creds['password'])
 
     db.session.add(new_user)
