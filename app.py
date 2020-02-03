@@ -10,19 +10,19 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
 
 db = SQLAlchemy(app)
 
-app.config['DEBUG'] = True
-app.config['TESTING'] = False
-app.config['MAIL_SERVER'] = 'mail.gmx.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USERNAME'] = 'wxsafeflight@gmx.com'
-app.config['MAIL_PASSWORD'] = 'wxsafeflight'
-app.config['MAIL_DEFAULT_SENDER'] = ('Wx Safe Flight', 'wxsafeflight@gmx.com')
-app.config['MAIL_MAX_EMAILS'] = None
-app.config['MAIL_ASCII_ATTACHMENTS'] = False
+# app.config['DEBUG'] = True
+# app.config['TESTING'] = False
+# app.config['MAIL_SERVER'] = 'mail.gmx.com'
+# app.config['MAIL_PORT'] = 587
+# app.config['MAIL_USE_TLS'] = True
+# app.config['MAIL_USE_SSL'] = False
+# app.config['MAIL_USERNAME'] = 'wxsafeflight@gmx.com'
+# app.config['MAIL_PASSWORD'] = 'wxsafeflight'
+# app.config['MAIL_DEFAULT_SENDER'] = ('Wx Safe Flight', 'wxsafeflight@gmx.com')
+# app.config['MAIL_MAX_EMAILS'] = None
+# app.config['MAIL_ASCII_ATTACHMENTS'] = False
 
-mail = Mail(app)
+# mail = Mail(app)
 
 
 
