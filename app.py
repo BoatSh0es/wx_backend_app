@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from flask_mail import Mail, Message
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -7,8 +8,22 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
 
-
 db = SQLAlchemy(app)
+
+app.config['DEBUG'] = True
+app.config['TESTING'] = False
+app.config['MAIL_SERVER'] = 'mail.gmx.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_USERNAME'] = 'wxsafeflight@gmx.com'
+app.config['MAIL_PASSWORD'] = 'wxsafeflight'
+app.config['MAIL_DEFAULT_SENDER'] = ('Wx Safe Flight', 'wxsafeflight@gmx.com')
+app.config['MAIL_MAX_EMAILS'] = None
+app.config['MAIL_ASCII_ATTACHMENTS'] = False
+
+mail = Mail(app)
+
 
 
 class User(db.Model):
@@ -18,6 +33,13 @@ class User(db.Model):
 
 
 
+@app.route('/mail')
+def send_mail():
+    msg = Message('Welcome!', recipients=['zachziino@pm.me'])
+    msg.html = '<b>Welcome to Wx Safe Flight! Enjoy, and may good weather be with you!</b>'
+    mail.send(msg)
+
+    return 'Message has been sent!'
 
 
 @app.route('/users')
@@ -49,6 +71,12 @@ def register():
 
     db.session.add(new_user)
     db.session.commit()
+
+    msg = Message('Welcome!', recipients=[user_creds_register['email']])
+    
+    msg.html = '<b>Welcome to Wx Safe Flight! Enjoy, and may good weather be with you!</b>'
+    mail.send(msg)
+
 
     return 'Done', 201
 
